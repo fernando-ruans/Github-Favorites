@@ -9,27 +9,16 @@ export class Favorites {
 
 
 load() {
-    this.entries = [
-        {
-        login: 'fernando-ruans',
-        name: "Fernando Ruan",
-        public_repos: '0',
-        folowers: '0'
-        },
-        {
-            login: 'gslogger',
-            name: "Gabriela Rocha",
-            public_repos: '0',
-            folowers: '0'
-        }
-    ]    
+    this.entries = JSON.parse(localStorage.getItem('@github-favorites')) || [] 
     }
 
     delete(user) {
         // Higher-order function
         const filteredEntries = this.entries.filter(entry => entry.login !== user.login)        
-        }
-    
+        
+        this.entries = filteredEntries
+        this.update()    
+    }    
 }
 
 // classe que vai criar a visualização e eventos do HTML
